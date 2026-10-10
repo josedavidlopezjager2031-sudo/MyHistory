@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obsessed By A Vampire – Anmelden</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card">
+  <h1>Obsessed By<br>A Vampire</h1>
+
+  <!-- 1. Startzustand -->
+  <section id="v-menu">
+    <p class="sub">Willkommen. Wie möchtest du fortfahren?</p>
+    <p class="msg" role="alert"></p>
+    <div class="stack">
+      <button class="btn big" data-view="login">Anmelden</button>
+      <button class="btn big ghost" data-view="register">Registrieren</button>
+    </div>
+  </section>
+
+  <!-- 2. Anmelden mit Benutzername -->
+  <section id="v-login" hidden>
+    <h2>Anmelden</h2>
+    <form id="f-login" class="stack" autocomplete="on">
+      <label>Benutzername
+        <input id="login-user" type="text" autocomplete="username" required maxlength="20">
+      </label>
+      <label>Passwort
+        <input id="login-pass" type="password" autocomplete="current-password" required>
+      </label>
+      <p class="msg" role="alert"></p>
+      <button class="btn big" type="submit">Anmelden</button>
+      <button class="link" type="button" data-view="menu">Zurück</button>
+    </form>
+  </section>
+
+  <!-- 3. Registrieren mit E-Mail -->
+  <section id="v-register" hidden>
+    <h2>Registrieren</h2>
+    <form id="f-register" class="stack">
+      <label>E-Mail-Adresse
+        <input id="reg-email" type="email" autocomplete="email" required>
+      </label>
+      <label>Passwort (mind. 8 Zeichen)
+        <input id="reg-pass" type="password" autocomplete="new-password" minlength="8" required>
+      </label>
+      <p class="msg" role="alert"></p>
+      <button class="btn big" type="submit">Konto erstellen</button>
+      <button class="link" type="button" data-view="menu">Zurück</button>
+    </form>
+  </section>
+
+  <!-- Hinweis nach Registrierung -->
+  <section id="v-mailsent" hidden>
+    <h2>Fast geschafft</h2>
+    <p class="sub">Wir haben eine Bestätigungs-E-Mail an <b id="sent-to"></b> geschickt. Klicke auf den Link darin, um zurückzukehren und deinen Benutzernamen zu wählen.</p>
+    <button class="btn big ghost" data-view="menu">Zur Startseite</button>
+  </section>
+
+  <!-- 4. Benutzername wählen (nach E-Mail-Bestätigung) -->
+  <section id="v-username" hidden>
+    <h2>Wähle deinen Benutzernamen</h2>
+    <p class="sub">Mit diesem Namen meldest du dich künftig an. Er kann später nicht geändert werden.</p>
+    <form id="f-username" class="stack">
+      <label>Benutzername
+        <input id="new-username" type="text" autocomplete="off" required minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}">
+      </label>
+      <p class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen und Unterstrich.</p>
+      <p class="msg" role="alert"></p>
+      <button class="btn big" type="submit">Bestätigen</button>
+    </form>
+  </section>
+
+  <!-- Eingeloggt -->
+  <section id="v-welcome" hidden>
+    <h2>Hallo, <span id="who"></span></h2>
+    <p class="sub">Du bist angemeldet. Die Sitzung bleibt auf allen Unterseiten aktiv.</p>
+    <div class="stack">
+      <a class="btn big" href="unterseite.html">Zur Unterseite</a>
+      <button class="btn big ghost" id="logout">Abmelden</button>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="auth.js"></script>
+<script src="menu.js"></script>
+</body>
+</html>
