@@ -6,7 +6,7 @@
 // Beide Werte findest du in Supabase unter: Project Settings > API
 // Der "anon public"-Key ist für das Frontend gedacht und darf öffentlich sein.
 // NIEMALS das Datenbank-Passwort oder den service_role-Key hier eintragen!
-const SUPABASE_URL = 'https://Obsessed by a vampire.supabase.co';
+const SUPABASE_URL = 'https://hmpdyeuyvzlhcrrzjhoq.supabase.co';
 const SUPABASE_ANON_KEY = 'hmpdyeuyvzlhcrrzjhoq';
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
