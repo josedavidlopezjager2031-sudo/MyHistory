@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unterseite – Obsessed By A Vampire</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card">
+  <h1>Obsessed By<br>A Vampire</h1>
+  <section id="content" hidden>
+    <h2>Eingeloggt als <span id="who"></span></h2>
+    <p class="sub">Diese Seite ist nur für angemeldete Nutzer mit Benutzernamen sichtbar.</p>
+    <div class="stack">
+      <a class="btn big ghost" href="index.html">Zur Startseite</a>
+      <button class="btn big" id="logout">Abmelden</button>
+    </div>
+  </section>
+  <p class="sub" id="loading">Lade …</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="auth.js"></script>
+<script>
+  // Dieses Muster kannst du auf JEDER Unterseite verwenden:
+  (async () => {
+    const user = await OABV.guard();          // leitet zu index.html um, falls nicht eingeloggt
+    if (!user) return;
+    document.getElementById('who').textContent = user.username;   // textContent = sicher gegen XSS
+    document.getElementById('loading').hidden = true;
+    document.getElementById('content').hidden = false;
+    document.getElementById('logout').addEventListener('click', () => OABV.logout());
+  })();
+</script>
+</body>
+</html>
