@@ -2,90 +2,397 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Obsessed By A Vampire – Anmelden</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Obsessed By A Vampire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2f1;--bg2:#ece5e4;--panel:#fff;--ink:#1b1417;--mute:#7a6d72;--line:#ddd2d2;--red:#a8102a;--redsoft:#a8102a14;--ok:#1f7a4d;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0b0d;--bg2:#161013;--panel:#1b1317;--ink:#efe7e6;--mute:#9a8b90;--line:#2d2227;--red:#e0405a;--redsoft:#e0405a1c;--ok:#4ccf8b}}
+:root[data-theme="dark"]{--bg:#0f0b0d;--bg2:#161013;--panel:#1b1317;--ink:#efe7e6;--mute:#9a8b90;--line:#2d2227;--red:#e0405a;--redsoft:#e0405a1c;--ok:#4ccf8b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px;flex-wrap:wrap}
+.logo{font:600 18px var(--serif);letter-spacing:.2px;background:none;border:0;padding:0}
+nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+nav button,nav a{background:none;border:0;padding:8px 14px;border-radius:99px;color:var(--mute);font-weight:500;font-size:14px;text-decoration:none}
+nav button[aria-current=true]{background:var(--redsoft);color:var(--red)}
+nav .theme{padding:8px 10px}
+nav button.login{border:1px solid var(--line);color:var(--ink);margin-left:4px}
+main{max-width:1100px;margin:auto;padding:0 20px 120px}
+.view{display:none}.view.on{display:block}
+/* Start */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:64px 0 40px}
+h1{font:300 clamp(40px,7vw,76px)/1.02 var(--serif);margin:0 0 24px;letter-spacing:-1.5px}
+.lead{font:300 19px/1.7 var(--serif);color:var(--ink);max-width:56ch}
+.lead p{margin:0 0 16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.tags span{border:1px solid var(--line);background:var(--panel);padding:5px 13px;border-radius:99px;font-size:13px;color:var(--mute)}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:block;text-align:center;text-decoration:none;background:var(--red);color:#fff;border:1px solid var(--red);padding:12px 22px;border-radius:10px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.big{padding:14px 20px;border-radius:12px;font-size:16px}
+.btn:disabled{opacity:.55;cursor:wait}
+.clock{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:32px;text-align:center}
+.clock svg{width:100%;max-width:260px}
+.clock .t{font:300 40px var(--serif);font-variant-numeric:tabular-nums;margin-top:-148px;position:relative}
+.clock small{display:block;color:var(--mute);font-size:13px;margin-top:6px;position:relative}
+.clock p{margin:92px 0 0;color:var(--mute);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{font:600 20px var(--serif);margin:0 0 6px}
+.card p{margin:0;color:var(--mute);font-size:14.5px}
+/* Lesen */
+.reader{display:grid;grid-template-columns:240px 1fr;gap:28px;padding-top:32px}
+.toc{position:sticky;top:76px;align-self:start;display:flex;flex-direction:column;gap:4px}
+.toc h4{margin:0 0 8px;font:600 15px var(--serif)}
+.toc button{text-align:left;background:none;border:0;padding:9px 12px;border-radius:10px;color:var(--mute);font-size:14px}
+.toc button[aria-current=true]{background:var(--redsoft);color:var(--red);font-weight:600}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,5vw,56px);min-height:70vh}
+.tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;color:var(--mute);font-size:13px;gap:12px;flex-wrap:wrap}
+.tools div{display:flex;gap:6px}
+.tools button{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:4px 11px}
+.page h2{font:600 32px/1.15 var(--serif);margin:0 0 28px}
+.text{font:300 var(--fs,19px)/1.85 var(--serif);max-width:62ch}
+.text p{margin:0 0 1.2em}
+.nextrow{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.nextrow .btn{padding:10px 20px}
+/* Charaktere */
+.chars{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding-top:32px}
+.char{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.head{display:flex;gap:16px;align-items:center}
+.av{width:60px;height:60px;border-radius:50%;background:var(--redsoft);color:var(--red);display:grid;place-items:center;font:600 26px var(--serif);flex:none}
+.char h3{margin:0;font:600 24px var(--serif)}
+.char .role{color:var(--mute);font-size:14px}
+.char p{margin:0;font-size:15px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:14px}
+.facts dt{color:var(--mute)}.facts dd{margin:0}
+h2.sec{font:300 34px var(--serif);margin:48px 0 0;letter-spacing:-.5px}
+/* Sneak-Fenster */
+.peek{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px #00000030;z-index:20;overflow:hidden}
+.peek>button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:13px 16px;font-weight:600;font-size:14px}
+.peek>button i{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;margin-right:8px;animation:p 2s infinite}
+@keyframes p{50%{opacity:.25}}
+.peek .body{display:none;max-height:300px;overflow:auto;border-top:1px solid var(--line)}
+.peek.open .body{display:block}
+.item{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.item:last-child{border:0}
+.item b{display:block;font:600 15px var(--serif);margin-bottom:2px}
+.item em{font:italic 300 15px var(--serif);color:var(--ink)}
+.item .k{font-size:12px;color:var(--red);font-weight:600}
+.lock{filter:blur(4px);user-select:none}
+/* Einstellungen */
+.pop{position:fixed;top:calc(62px + env(safe-area-inset-top,0px));right:16px;width:min(300px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px #00000030;padding:20px;z-index:30}
+.pop h4,.box h4{margin:0 0 16px;font:600 20px var(--serif)}
+.pop label,.lbl{display:flex;justify-content:space-between;font-size:14px;color:var(--mute);margin:0 0 8px}
+.pop input[type=range]{width:100%;accent-color:var(--red);margin:0 0 20px}
+.sws{display:flex;gap:10px;flex-wrap:wrap}
+.sw{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;font-size:12px;color:var(--mute);padding:0}
+.sw i{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);display:block}
+.sw[aria-pressed=true]{color:var(--ink);font-weight:600}
+.sw[aria-pressed=true] i{border-color:var(--panel);box-shadow:0 0 0 2px var(--red)}
+/* Anmelde-Fenster */
+.modal{position:fixed;inset:0;background:#000000a0;display:grid;place-items:center;z-index:40;padding:20px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:32px;width:min(400px,100%);max-height:100%;overflow:auto}
+.box h4{font-size:24px;margin-bottom:6px}
+.sub{color:var(--mute);margin:0 0 20px;font-size:15px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.box label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--mute)}
+.box input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.link{background:none;border:0;color:var(--mute);font-size:14px;padding:4px}
+.hint{margin:-6px 0 0;font-size:12.5px;color:var(--mute)}
+.msg{margin:0 0 12px;font-size:14px;color:var(--red)}
+.stack .msg{margin:0}
+.msg:empty{display:none}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
+@media(max-width:820px){.hero,.reader,.chars,.cards{grid-template-columns:1fr}.toc{position:static;flex-direction:row;flex-wrap:wrap}.toc h4{width:100%}.hero{padding-top:36px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
 </head>
 <body>
-<main class="card">
-  <h1>Obsessed By<br>A Vampire</h1>
+<header><div class="bar">
+<button class="logo" data-go="start">Obsessed By A Vampire</button>
+<nav>
+<button data-go="start" aria-current="true">Start</button>
+<button data-go="lesen">Lesen</button>
+<button data-go="chars">Charaktere</button>
+<a href="unterseite.html" id="mine" hidden>Mein Bereich</a>
+<button class="theme" id="theme" aria-label="Hell oder dunkel wechseln">◐</button>
+<button class="theme" id="gear" aria-label="Einstellungen" aria-expanded="false">⚙</button>
+<button class="login" id="login">Anmelden</button>
+</nav></div></header>
 
-  <!-- 1. Startzustand -->
-  <section id="v-menu">
-    <p class="sub">Willkommen. Wie möchtest du fortfahren?</p>
-    <p class="msg" role="alert"></p>
-    <div class="stack">
-      <button class="btn big" data-view="login">Anmelden</button>
-      <button class="btn big ghost" data-view="register">Registrieren</button>
-    </div>
-  </section>
+<main>
+<section class="view on" id="start">
+<div class="hero">
+<div>
+<h1>Obsessed By<br>A Vampire</h1>
+<div class="lead">
+<p>Für den sechzehnjährigen Gorin ist das Leben eine permanente Hölle. Zu Hause regieren Grausamkeit und rohe Gewalt, bis ihn die unerträgliche Erschöpfung in die kalte Dunkelheit der Nacht treibt. Doch auf den verlassenen Straßen von Düsseldorf wartet keine Zuflucht, sondern Nari – eine wunderschöne, aber unerbittliche Vampirin.</p>
+<p>Ihr Biss erlöst Gorin zwar von seinen Peinigern, kettet ihn jedoch an ein grausames Schicksal: Ein absolut tödlicher 12-Stunden-Zyklus beginnt. Bekommt Gorins Körper nicht rechtzeitig ihr Blut, setzt der physische Verfall ein. Während er versucht, die Balance zwischen Mensch und Raubtier zu halten, wird auch seine beste Freundin Sei in den Strudel aus magischer Versklavung und blutigen Opfergaben hineingezogen.</p>
+<p>Doch die wahre Gefahr lauert im Verborgenen. In den Schatten formiert sich bereits The Scarlet Long Way to Die (TSLTD) – eine globale, unsichtbare Elite-Jägerschaft, angeführt von Seis älterer Schwester Akira. Und ihr Befehl ist absolut: Die Anomalie muss exekutiert werden. Koste es, was es wolle.</p>
+</div>
+<div class="tags"><span>Dark Fantasy</span><span>Modern Vampire Lore</span><span>Dark Drama</span><span>Action Thriller</span><span>Anti-Hero Fiction</span></div>
+<div class="cta"><button class="btn" data-go="lesen">Jetzt lesen</button><button class="btn ghost" data-go="chars">Charaktere kennenlernen</button></div>
+</div>
+<aside class="clock">
+<svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" fill="none" stroke="var(--line)" stroke-width="8"/><circle id="ring" cx="100" cy="100" r="88" fill="none" stroke="var(--red)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="553" stroke-dashoffset="0"/></svg>
+<div class="t" id="tt">12:00:00</div>
+<small>bis zum nächsten Biss</small>
+<p>Gorins Zyklus dauert 12 Stunden. Danach beginnt der Verfall.</p>
+</aside>
+</div>
+<div class="cards">
+<div class="card"><h3>Lesen</h3><p>Alle Kapitel an einem Ort, mit einstellbarer Schriftgröße.</p></div>
+<div class="card"><h3>Charaktere</h3><p>Steckbriefe zu Gorin, Nari, Sei, Akira und TSLTD.</p></div>
+<div class="card"><h3>Sneak Peeks &amp; Leaks</h3><p>Das kleine Fenster unten rechts verrät, was als Nächstes kommt.</p></div>
+</div>
+</section>
 
-  <!-- 2. Anmelden mit Benutzername -->
-  <section id="v-login" hidden>
-    <h2>Anmelden</h2>
-    <form id="f-login" class="stack" autocomplete="on">
-      <label>Benutzername
-        <input id="login-user" type="text" autocomplete="username" required maxlength="20">
-      </label>
-      <label>Passwort
-        <input id="login-pass" type="password" autocomplete="current-password" required>
-      </label>
-      <p class="msg" role="alert"></p>
-      <button class="btn big" type="submit">Anmelden</button>
-      <button class="link" type="button" data-view="menu">Zurück</button>
-    </form>
-  </section>
+<section class="view" id="lesen">
+<div class="reader">
+<div class="toc" id="toc"><h4>Kapitel</h4></div>
+<article class="page">
+<div class="tools"><span id="meta"></span><div><button id="fm" aria-label="Schrift kleiner">A−</button><button id="fp" aria-label="Schrift größer">A+</button></div></div>
+<h2 id="ct"></h2><div class="text" id="cx"></div>
+<div class="nextrow"><button class="btn ghost" id="prev">Zurück</button><button class="btn" id="next">Nächstes Kapitel</button></div>
+</article></div>
+</section>
 
-  <!-- 3. Registrieren mit E-Mail -->
-  <section id="v-register" hidden>
-    <h2>Registrieren</h2>
-    <form id="f-register" class="stack">
-      <label>E-Mail-Adresse
-        <input id="reg-email" type="email" autocomplete="email" required>
-      </label>
-      <label>Passwort (mind. 8 Zeichen)
-        <input id="reg-pass" type="password" autocomplete="new-password" minlength="8" required>
-      </label>
-      <p class="msg" role="alert"></p>
-      <button class="btn big" type="submit">Konto erstellen</button>
-      <button class="link" type="button" data-view="menu">Zurück</button>
-    </form>
-  </section>
-
-  <!-- Hinweis nach Registrierung -->
-  <section id="v-mailsent" hidden>
-    <h2>Fast geschafft</h2>
-    <p class="sub">Wir haben eine Bestätigungs-E-Mail an <b id="sent-to"></b> geschickt. Klicke auf den Link darin, um zurückzukehren und deinen Benutzernamen zu wählen.</p>
-    <button class="btn big ghost" data-view="menu">Zur Startseite</button>
-  </section>
-
-  <!-- 4. Benutzername wählen (nach E-Mail-Bestätigung) -->
-  <section id="v-username" hidden>
-    <h2>Wähle deinen Benutzernamen</h2>
-    <p class="sub">Mit diesem Namen meldest du dich künftig an. Er kann später nicht geändert werden.</p>
-    <form id="f-username" class="stack">
-      <label>Benutzername
-        <input id="new-username" type="text" autocomplete="off" required minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}">
-      </label>
-      <p class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen und Unterstrich.</p>
-      <p class="msg" role="alert"></p>
-      <button class="btn big" type="submit">Bestätigen</button>
-    </form>
-  </section>
-
-  <!-- Eingeloggt -->
-  <section id="v-welcome" hidden>
-    <h2>Hallo, <span id="who"></span></h2>
-    <p class="sub">Du bist angemeldet. Die Sitzung bleibt auf allen Unterseiten aktiv.</p>
-    <div class="stack">
-      <a class="btn big" href="unterseite.html">Zur Unterseite</a>
-      <button class="btn big ghost" id="logout">Abmelden</button>
-    </div>
-  </section>
+<section class="view" id="chars">
+<h2 class="sec">Charaktere</h2>
+<div class="chars" id="cg"></div>
+</section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<!-- Einstellungen -->
+<div class="pop" id="setp" hidden role="dialog" aria-label="Einstellungen">
+<h4>Einstellungen</h4>
+<label for="fsr">Schriftgröße <span id="fsv">19 px</span></label>
+<input type="range" id="fsr" min="15" max="27" value="19">
+<div class="lbl">Farbdesign</div>
+<div class="sws">
+<button class="sw" data-acc="original"><i style="background:#a8102a"></i>Original</button>
+<button class="sw" data-acc="gruen"><i style="background:#1f9d5c"></i>Grün</button>
+<button class="sw" data-acc="rot"><i style="background:#e0252d"></i>Rot</button>
+<button class="sw" data-acc="lila"><i style="background:#8a4fd6"></i>Lila</button>
+<button class="sw" data-acc="pink"><i style="background:#e8478a"></i>Pink</button>
+</div></div>
+
+<!-- Anmelden / Registrieren (Supabase) -->
+<div class="modal" id="lg" hidden>
+<div class="box" role="dialog" aria-label="Anmelden oder Registrieren">
+
+<section id="m-menu">
+<h4>Willkommen</h4>
+<p class="sub">Wie möchtest du fortfahren?</p>
+<p class="msg" role="alert"></p>
+<div class="stack">
+<button class="btn big" data-mv="login">Anmelden</button>
+<button class="btn big ghost" data-mv="register">Registrieren</button>
+<button class="link" data-close>Schließen</button>
+</div></section>
+
+<section id="m-login" hidden>
+<h4>Anmelden</h4>
+<form id="f-login" class="stack">
+<label>Benutzername<input id="login-user" type="text" autocomplete="username" required maxlength="20"></label>
+<label>Passwort<input id="login-pass" type="password" autocomplete="current-password" required></label>
+<p class="msg" role="alert"></p>
+<button class="btn big" type="submit">Anmelden</button>
+<button class="link" type="button" data-mv="menu">Zurück</button>
+</form></section>
+
+<section id="m-register" hidden>
+<h4>Registrieren</h4>
+<form id="f-register" class="stack">
+<label>E-Mail-Adresse<input id="reg-email" type="email" autocomplete="email" required></label>
+<label>Passwort (mind. 8 Zeichen)<input id="reg-pass" type="password" autocomplete="new-password" minlength="8" required></label>
+<p class="msg" role="alert"></p>
+<button class="btn big" type="submit">Konto erstellen</button>
+<button class="link" type="button" data-mv="menu">Zurück</button>
+</form></section>
+
+<section id="m-mailsent" hidden>
+<h4>Fast geschafft</h4>
+<p class="sub">Wir haben eine Bestätigungs-E-Mail an <b id="sent-to"></b> geschickt. Klicke auf den Link darin, um zurückzukehren und deinen Benutzernamen zu wählen.</p>
+<button class="btn big ghost" data-close>Schließen</button>
+</section>
+
+<section id="m-username" hidden>
+<h4>Wähle deinen Benutzernamen</h4>
+<p class="sub">Mit diesem Namen meldest du dich künftig an. Er kann später nicht geändert werden.</p>
+<form id="f-username" class="stack">
+<label>Benutzername<input id="new-username" type="text" autocomplete="off" required minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}"></label>
+<p class="hint">3 bis 20 Zeichen: Buchstaben, Zahlen und Unterstrich.</p>
+<p class="msg" role="alert"></p>
+<button class="btn big" type="submit">Bestätigen</button>
+</form></section>
+
+</div></div>
+
+<aside class="peek" id="peek" aria-label="Sneak Peeks und Leaks">
+<button id="pk" aria-expanded="false"><span><i></i>Sneak Peeks &amp; Leaks</span><span id="pa">+</span></button>
+<div class="body" id="pb"></div>
+</aside>
+<footer>Obsessed By A Vampire – eine Web Novel</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="auth.js"></script>
-<script src="menu.js"></script>
+<script>
+/* ===== Inhalte: hier einfach bearbeiten ===== */
+const chapters=[
+{t:"Prolog: Die Nacht von Düsseldorf",x:["Platzhalter-Text. Ersetze diesen Abschnitt durch dein erstes Kapitel.","Die Straßen waren leer. Gorin ging, ohne zu wissen wohin, nur weg von dem Haus, in dem jede Tür eine Drohung war. Die Kälte biss in seine Hände, aber sie war ehrlicher als alles, was er hinter sich gelassen hatte.","Dann hörte er Schritte, die nicht seine waren."]},
+{t:"Kapitel 1: Der erste Biss",x:["Platzhalter-Text. Dieses Kapitel folgt in Kürze."]},
+{t:"Kapitel 2: Zwölf Stunden",x:["Platzhalter-Text. Dieses Kapitel folgt in Kürze."]}];
+const chars=[
+{n:"Gorin",r:"Protagonist",f:{Alter:"16",Ort:"Düsseldorf",Spezies:"Mensch, an Nari gebunden"},d:"Wächst in Gewalt auf und flieht in die Nacht. Nari rettet ihn vor seinen Peinigern und bindet ihn zugleich an einen tödlichen 12-Stunden-Zyklus."},
+{n:"Nari",r:"Vampirin",f:{Alter:"unbekannt",Ort:"Düsseldorf",Spezies:"Vampirin"},d:"Wunderschön und unerbittlich. Ihr Blut hält Gorin am Leben, ihr Biss hat sein Schicksal besiegelt."},
+{n:"Sei",r:"Beste Freundin",f:{Alter:"unbekannt",Ort:"Düsseldorf",Familie:"Schwester von Akira"},d:"Gorins beste Freundin. Sie wird in den Strudel aus magischer Versklavung und blutigen Opfergaben gezogen."},
+{n:"Akira",r:"Anführerin von TSLTD",f:{Alter:"unbekannt",Rolle:"Seis ältere Schwester",Ziel:"Die Anomalie exekutieren"},d:"Führt die Elite-Jägerschaft an. Ihr Befehl ist absolut und duldet keine Ausnahme."},
+{n:"TSLTD",r:"The Scarlet Long Way to Die",f:{Typ:"Jägerschaft",Reichweite:"global",Status:"unsichtbar"},d:"Eine globale, unsichtbare Elite-Jägerschaft, die im Verborgenen agiert."}];
+const peeks=[
+{k:"Sneak Peek",t:"Kapitel 1",q:"„Ihr Lächeln war das Letzte, was er sah, bevor die Welt still wurde.“ (Platzhalter)"},
+{k:"Leak",t:"Akira zieht die Schlinge zu",q:"Ein neues Mitglied von TSLTD tritt in Erscheinung."},
+{k:"Leak",t:"Seis Entscheidung",q:"████████ ███ ██████ ███████",lock:1}];
+
+const $=s=>document.querySelector(s);
+const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+
+/* ===== Navigation ===== */
+function go(v){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id===v));
+document.querySelectorAll('nav [data-go]').forEach(b=>b.setAttribute('aria-current',b.dataset.go===v));scrollTo(0,0)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+
+/* ===== Reader ===== */
+let cur=0,fs=19;
+function show(i){cur=i;const c=chapters[i];$('#ct').textContent=c.t;$('#cx').innerHTML=c.x.map(()=>'<p></p>').join('');
+$('#cx').querySelectorAll('p').forEach((p,j)=>p.textContent=c.x[j]);
+$('#meta').textContent='Kapitel '+(i+1)+' von '+chapters.length;
+document.querySelectorAll('#toc button').forEach((b,j)=>b.setAttribute('aria-current',j===i));
+$('#prev').style.visibility=i?'visible':'hidden';$('#next').style.visibility=i<chapters.length-1?'visible':'hidden';
+store('oabv-ch',i)}
+chapters.forEach((c,i)=>{const b=document.createElement('button');b.textContent=c.t.split(':')[0];b.onclick=()=>{show(i);scrollTo(0,0)};$('#toc').append(b)});
+$('#prev').onclick=()=>{show(cur-1);scrollTo(0,0)};$('#next').onclick=()=>{show(cur+1);scrollTo(0,0)};
+function setFs(v){fs=Math.max(15,Math.min(27,+v||19));$('#cx').style.setProperty('--fs',fs+'px');$('#fsr').value=fs;$('#fsv').textContent=fs+' px';store('oabv-fs',fs)}
+$('#fm').onclick=()=>setFs(fs-1);$('#fp').onclick=()=>setFs(fs+1);$('#fsr').oninput=e=>setFs(e.target.value);
+const sv=+load('oabv-ch')||0;show(sv<chapters.length?sv:0);
+
+/* ===== Charaktere ===== */
+chars.forEach(c=>{const el=document.createElement('div');el.className='char';
+el.innerHTML='<div class="head"><div class="av"></div><div><h3></h3><div class="role"></div></div></div><p></p><dl class="facts"></dl>';
+el.querySelector('.av').textContent=c.n[0];el.querySelector('h3').textContent=c.n;el.querySelector('.role').textContent=c.r;
+el.querySelector('p').textContent=c.d;
+Object.entries(c.f).forEach(([k,v])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=v;el.querySelector('dl').append(dt,dd)});
+$('#cg').append(el)});
+
+/* ===== Sneak Peeks ===== */
+peeks.forEach(p=>{const d=document.createElement('div');d.className='item';
+d.innerHTML='<span class="k"></span><b></b><em></em>';d.querySelector('.k').textContent=p.k;d.querySelector('b').textContent=p.t;
+const em=d.querySelector('em');em.textContent=p.q;if(p.lock)em.className='lock';$('#pb').append(d)});
+$('#pk').onclick=()=>{const o=$('#peek').classList.toggle('open');$('#pk').setAttribute('aria-expanded',o);$('#pa').textContent=o?'–':'+'};
+
+/* ===== 12-Stunden-Uhr ===== */
+function tick(){const n=new Date(),s=(n.getHours()%12)*3600+n.getMinutes()*60+n.getSeconds(),r=43200-s,
+h=Math.floor(r/3600),m=Math.floor(r%3600/60),sec=r%60,z=v=>String(v).padStart(2,'0');
+$('#tt').textContent=z(h)+':'+z(m)+':'+z(sec);$('#ring').setAttribute('stroke-dashoffset',553*(1-r/43200))}
+tick();setInterval(tick,1000);
+
+/* ===== Farbdesign und Hell/Dunkel ===== */
+const ACC={gruen:['#1f7a4d','#4ccf8b'],rot:['#d41f26','#ff5a5f'],lila:['#7a3fc0','#b583f5'],pink:['#d6336c','#ff7eb3']};
+let acc='original';
+const isDark=()=>getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#0f0b0d';
+function applyAccent(){const s=document.documentElement.style,a=ACC[acc],d=isDark();
+if(!a){s.removeProperty('--red');s.removeProperty('--redsoft')}else{s.setProperty('--red',a[d?1:0]);s.setProperty('--redsoft',a[d?1:0]+(d?'1c':'14'))}
+document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.acc===acc));store('oabv-acc',acc)}
+document.querySelectorAll('.sw').forEach(b=>b.onclick=()=>{acc=b.dataset.acc;applyAccent()});
+$('#theme').onclick=()=>{const t=isDark()?'light':'dark';document.documentElement.dataset.theme=t;store('oabv-theme',t);applyAccent()};
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',applyAccent);
+function pop(o){$('#setp').hidden=!o;$('#gear').setAttribute('aria-expanded',o)}
+$('#gear').onclick=e=>{e.stopPropagation();pop($('#setp').hidden)};
+document.addEventListener('click',e=>{if(!e.target.closest('#setp'))pop(false)});
+{const a=load('oabv-acc'),t=load('oabv-theme');if(a&&(a==='original'||ACC[a]))acc=a;if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}
+setFs(+load('oabv-fs')||19);applyAccent();
+
+/* ===== Anmelden / Registrieren mit Supabase ===== */
+const sb=OABV.sb;
+let user='',hasSession=false;
+const MV=['menu','login','register','mailsent','username'];
+function mview(n){MV.forEach(v=>$('#m-'+v).hidden=v!==n);
+document.querySelectorAll('#lg .msg').forEach(m=>m.textContent='');
+const i=$('#m-'+n+' input');if(i)i.focus()}
+function openModal(n){$('#lg').hidden=false;mview(n)}
+function closeModal(){$('#lg').hidden=true}
+const msg=(v,t)=>{$('#m-'+v+' .msg').textContent=t};
+async function busy(form,fn){const b=form.querySelector('button[type=submit]');b.disabled=true;try{await fn()}finally{b.disabled=false}}
+
+document.addEventListener('click',e=>{
+const m=e.target.closest('[data-mv]');if(m)mview(m.dataset.mv);
+if(e.target.closest('[data-close]')||e.target.id==='lg')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){pop(false);closeModal()}});
+
+function renderUser(){
+$('#login').textContent=user?'Abmelden ('+user+')':(hasSession?'Namen wählen':'Anmelden');
+$('#mine').hidden=!user}
+$('#login').onclick=()=>{
+if(user){sb.auth.signOut()}else if(hasSession){openModal('username')}else{openModal('menu')}};
+
+async function route(){
+const {data:{session}}=await sb.auth.getSession();
+hasSession=!!session;user='';
+if(session){
+try{const p=await OABV.getProfile(session.user.id);if(p)user=p.username;
+else{renderUser();openModal('username');return}}
+catch(err){console.error(err)}}
+renderUser();
+if(session&&user)closeModal();
+if(location.hash||location.search)history.replaceState(null,'',location.pathname)}
+
+function linkError(){
+const p=new URLSearchParams(location.hash.slice(1)||location.search.slice(1));
+if(p.get('error_description')){openModal('menu');msg('menu','Der Bestätigungslink ist ungültig oder abgelaufen. Bitte registriere dich erneut.');
+history.replaceState(null,'',location.pathname);return true}return false}
+
+/* Keine weiteren Supabase-Aufrufe direkt im Callback, daher setTimeout */
+sb.auth.onAuthStateChange(ev=>{
+if(['INITIAL_SESSION','SIGNED_IN','SIGNED_OUT'].includes(ev))setTimeout(()=>{if(!linkError())route()},0)});
+
+$('#f-login').addEventListener('submit',e=>{e.preventDefault();busy(e.target,async()=>{
+const name=$('#login-user').value.trim(),pw=$('#login-pass').value;
+const fail=()=>msg('login','Benutzername oder Passwort ist falsch.');
+const {data:email,error:le}=await sb.rpc('email_for_username',{p_username:name});
+if(le||!email)return fail();
+const {error}=await sb.auth.signInWithPassword({email,password:pw});
+if(error)return fail();
+$('#login-pass').value=''})});
+
+$('#f-register').addEventListener('submit',e=>{e.preventDefault();busy(e.target,async()=>{
+const email=$('#reg-email').value.trim(),pw=$('#reg-pass').value;
+if(pw.length<8)return msg('register','Das Passwort braucht mindestens 8 Zeichen.');
+const {data,error}=await sb.auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname}});
+if(error)return msg('register','Registrierung fehlgeschlagen: '+error.message);
+if(data.user&&data.user.identities&&data.user.identities.length===0)return msg('register','Diese E-Mail-Adresse ist bereits registriert. Bitte melde dich an.');
+$('#sent-to').textContent=email;$('#reg-pass').value='';mview('mailsent')})});
+
+$('#f-username').addEventListener('submit',e=>{e.preventDefault();busy(e.target,async()=>{
+const name=$('#new-username').value.trim();
+if(!/^[A-Za-z0-9_]{3,20}$/.test(name))return msg('username','Erlaubt sind 3 bis 20 Buchstaben, Zahlen oder Unterstriche.');
+const {data:{user:u}}=await sb.auth.getUser();
+if(!u)return mview('menu');
+const {error}=await sb.from('profiles').insert({id:u.id,username:name});
+if(error){if(error.code==='23505')return msg('username','Dieser Benutzername ist bereits vergeben.');
+console.error(error);return msg('username','Der Name konnte nicht gespeichert werden.')}
+route()})});
+
+if(!linkError())route();
+</script>
 </body>
 </html>
