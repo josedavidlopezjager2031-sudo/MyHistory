@@ -2,36 +2,120 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unterseite – Obsessed By A Vampire</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mein Bereich – Obsessed By A Vampire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2f1;--bg2:#ece5e4;--panel:#fff;--ink:#1b1417;--mute:#7a6d72;--line:#ddd2d2;--red:#a8102a;--redsoft:#a8102a14;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0b0d;--bg2:#161013;--panel:#1b1317;--ink:#efe7e6;--mute:#9a8b90;--line:#2d2227;--red:#e0405a;--redsoft:#e0405a1c}}
+:root[data-theme="dark"]{--bg:#0f0b0d;--bg2:#161013;--panel:#1b1317;--ink:#efe7e6;--mute:#9a8b90;--line:#2d2227;--red:#e0405a;--redsoft:#e0405a1c}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px;flex-wrap:wrap}
+.logo{font:600 18px var(--serif);color:var(--ink);text-decoration:none}
+nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+nav button,nav a{background:none;border:0;padding:8px 14px;border-radius:99px;color:var(--mute);font-weight:500;font-size:14px;text-decoration:none}
+nav a[aria-current=true]{background:var(--redsoft);color:var(--red)}
+nav .theme{padding:8px 10px}
+nav button.login{border:1px solid var(--line);color:var(--ink);margin-left:4px}
+main{max-width:1100px;margin:auto;padding:64px 20px 80px}
+h1{font:300 clamp(36px,6vw,64px)/1.05 var(--serif);margin:0 0 16px;letter-spacing:-1.2px}
+.sub{font:300 19px/1.7 var(--serif);color:var(--mute);max-width:56ch;margin:0 0 28px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px;max-width:520px}
+.card h3{font:600 20px var(--serif);margin:0 0 6px}
+.card p{margin:0 0 20px;color:var(--mute);font-size:15px}
+.btn{display:inline-block;text-align:center;text-decoration:none;background:var(--red);color:#fff;border:1px solid var(--red);padding:12px 22px;border-radius:10px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.pop{position:fixed;top:calc(62px + env(safe-area-inset-top,0px));right:16px;width:min(300px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px #00000030;padding:20px;z-index:30}
+.pop h4{margin:0 0 16px;font:600 20px var(--serif)}
+.lbl{font-size:14px;color:var(--mute);margin:0 0 8px}
+.sws{display:flex;gap:10px;flex-wrap:wrap}
+.sw{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;font-size:12px;color:var(--mute);padding:0}
+.sw i{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);display:block}
+.sw[aria-pressed=true]{color:var(--ink);font-weight:600}
+.sw[aria-pressed=true] i{border-color:var(--panel);box-shadow:0 0 0 2px var(--red)}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
+</style>
 </head>
 <body>
-<main class="card">
-  <h1>Obsessed By<br>A Vampire</h1>
-  <section id="content" hidden>
-    <h2>Eingeloggt als <span id="who"></span></h2>
-    <p class="sub">Diese Seite ist nur für angemeldete Nutzer mit Benutzernamen sichtbar.</p>
-    <div class="stack">
-      <a class="btn big ghost" href="index.html">Zur Startseite</a>
-      <button class="btn big" id="logout">Abmelden</button>
-    </div>
-  </section>
-  <p class="sub" id="loading">Lade …</p>
+<header><div class="bar">
+<a class="logo" href="index.html">Obsessed By A Vampire</a>
+<nav>
+<a href="index.html">Start</a>
+<a href="unterseite.html" aria-current="true">Mein Bereich</a>
+<button class="theme" id="theme" aria-label="Hell oder dunkel wechseln">◐</button>
+<button class="theme" id="gear" aria-label="Einstellungen" aria-expanded="false">⚙</button>
+<button class="login" id="logout">Abmelden</button>
+</nav></div></header>
+
+<main>
+<p class="sub" id="loading">Lade …</p>
+<section id="content" hidden>
+<h1>Hallo, <span id="who"></span></h1>
+<p class="sub">Schön, dass du da bist. Diese Seite sehen nur angemeldete Leser mit Benutzernamen.</p>
+<div class="card">
+<h3>Dein Konto</h3>
+<p>Du bist als <b id="who2"></b> angemeldet. Die Sitzung bleibt auf allen Seiten aktiv.</p>
+<div class="row"><a class="btn" href="index.html">Weiterlesen</a><button class="btn ghost" id="logout2">Abmelden</button></div>
+</div>
+</section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<div class="pop" id="setp" hidden role="dialog" aria-label="Einstellungen">
+<h4>Einstellungen</h4>
+<div class="lbl">Farbdesign</div>
+<div class="sws">
+<button class="sw" data-acc="original"><i style="background:#a8102a"></i>Original</button>
+<button class="sw" data-acc="gruen"><i style="background:#1f9d5c"></i>Grün</button>
+<button class="sw" data-acc="rot"><i style="background:#e0252d"></i>Rot</button>
+<button class="sw" data-acc="lila"><i style="background:#8a4fd6"></i>Lila</button>
+<button class="sw" data-acc="pink"><i style="background:#e8478a"></i>Pink</button>
+</div></div>
+<footer>Obsessed By A Vampire – eine Web Novel</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="auth.js"></script>
 <script>
-  // Dieses Muster kannst du auf JEDER Unterseite verwenden:
-  (async () => {
-    const user = await OABV.guard();          // leitet zu index.html um, falls nicht eingeloggt
-    if (!user) return;
-    document.getElementById('who').textContent = user.username;   // textContent = sicher gegen XSS
-    document.getElementById('loading').hidden = true;
-    document.getElementById('content').hidden = false;
-    document.getElementById('logout').addEventListener('click', () => OABV.logout());
-  })();
+const $=s=>document.querySelector(s);
+const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+
+/* Farbdesign und Hell/Dunkel (gleiche Einstellungen wie auf der Startseite) */
+const ACC={gruen:['#1f7a4d','#4ccf8b'],rot:['#d41f26','#ff5a5f'],lila:['#7a3fc0','#b583f5'],pink:['#d6336c','#ff7eb3']};
+let acc='original';
+const isDark=()=>getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#0f0b0d';
+function applyAccent(){const s=document.documentElement.style,a=ACC[acc],d=isDark();
+if(!a){s.removeProperty('--red');s.removeProperty('--redsoft')}else{s.setProperty('--red',a[d?1:0]);s.setProperty('--redsoft',a[d?1:0]+(d?'1c':'14'))}
+document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.acc===acc));store('oabv-acc',acc)}
+document.querySelectorAll('.sw').forEach(b=>b.onclick=()=>{acc=b.dataset.acc;applyAccent()});
+$('#theme').onclick=()=>{const t=isDark()?'light':'dark';document.documentElement.dataset.theme=t;store('oabv-theme',t);applyAccent()};
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',applyAccent);
+function pop(o){$('#setp').hidden=!o;$('#gear').setAttribute('aria-expanded',o)}
+$('#gear').onclick=e=>{e.stopPropagation();pop($('#setp').hidden)};
+document.addEventListener('click',e=>{if(!e.target.closest('#setp'))pop(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pop(false)});
+{const a=load('oabv-acc'),t=load('oabv-theme');if(a&&(a==='original'||ACC[a]))acc=a;if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}
+applyAccent();
+
+/* Session prüfen: ohne Login oder ohne Benutzernamen geht es zurück zur Startseite */
+(async()=>{
+const u=await OABV.guard();
+if(!u)return;
+$('#who').textContent=u.username;
+$('#who2').textContent=u.username;
+$('#loading').hidden=true;
+$('#content').hidden=false;
+$('#logout').onclick=()=>OABV.logout();
+$('#logout2').onclick=()=>OABV.logout();
+})();
 </script>
 </body>
 </html>
