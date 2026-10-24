@@ -6,7 +6,7 @@
 <title>My History</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter:wght@400;500;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f2f1;--bg2:#ece5e4;--panel:#fff;--ink:#1b1417;--mute:#7a6d72;--line:#ddd2d2;--red:#a8102a;--redsoft:#a8102a14;--ok:#1f7a4d;
 --serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -40,11 +40,6 @@ h1{font:300 clamp(40px,7vw,76px)/1.02 var(--serif);margin:0 0 24px;letter-spacin
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn.big{padding:14px 20px;border-radius:12px;font-size:16px}
 .btn:disabled{opacity:.55;cursor:wait}
-.clock{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:32px;text-align:center}
-.clock svg{width:100%;max-width:260px}
-.clock .t{font:300 40px var(--serif);font-variant-numeric:tabular-nums;margin-top:-148px;position:relative}
-.clock small{display:block;color:var(--mute);font-size:13px;margin-top:6px;position:relative}
-.clock p{margin:92px 0 0;color:var(--mute);font-size:14px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
 .card h3{font:600 20px var(--serif);margin:0 0 6px}
@@ -60,10 +55,20 @@ h1{font:300 clamp(40px,7vw,76px)/1.02 var(--serif);margin:0 0 24px;letter-spacin
 .tools div{display:flex;gap:6px}
 .tools button{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:4px 11px}
 .page h2{font:600 32px/1.15 var(--serif);margin:0 0 28px}
-.text{font:300 var(--fs,19px)/1.85 var(--serif);max-width:62ch}
+.text{font:300 var(--fs,19px)/var(--lh,1.85) var(--tf,var(--serif));max-width:var(--tw,62ch)}
 .text p{margin:0 0 1.2em}
 .nextrow{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
 .nextrow .btn{padding:10px 20px}
+/* Vorlesen (Text-to-Speech) */
+.tts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:-8px 0 26px;font-size:13px;color:var(--mute)}
+.tts button{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 14px;font-weight:600;font-size:13px;color:var(--ink)}
+.tts button.main{background:var(--red);border-color:var(--red);color:#fff}
+.tts button:disabled{opacity:.45;cursor:not-allowed}
+.tts label{display:inline-flex;align-items:center;gap:6px}
+.tts select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit;max-width:190px}
+.tts .sp{flex:1}
+.tts .st{font-variant-numeric:tabular-nums}
+.text p.speaking{background:var(--redsoft);box-shadow:-10px 0 0 var(--redsoft),10px 0 0 var(--redsoft);border-radius:4px;transition:background .2s}
 /* Charaktere */
 .chars{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding-top:32px}
 .char{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
@@ -98,6 +103,51 @@ h2.sec{font:300 34px var(--serif);margin:48px 0 0;letter-spacing:-.5px}
 .sw i{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);display:block}
 .sw[aria-pressed=true]{color:var(--ink);font-weight:600}
 .sw[aria-pressed=true] i{border-color:var(--panel);box-shadow:0 0 0 2px var(--red)}
+/* Zusatz-Einstellungen */
+:root[data-bg="sepia"]{--bg:#f1e6d0;--bg2:#e7d9bd;--panel:#f8efdc;--ink:#3b2f22;--mute:#7d6b55;--line:#d8c8a8}
+:root[data-bg="oled"]{--bg:#000;--bg2:#0a0a0a;--panel:#0d0d0d;--ink:#e8e2e2;--mute:#8d8486;--line:#222}
+:root[data-hl="0"] .text p.speaking{background:none;box-shadow:none}
+.pop{max-height:calc(100vh - 90px - env(safe-area-inset-top,0px));overflow-y:auto}
+.pop .grp{margin:22px 0 10px;padding-top:16px;border-top:1px solid var(--line);font:600 13px var(--sans);letter-spacing:.4px;text-transform:uppercase;color:var(--mute)}
+.seg{display:flex;gap:6px;margin:0 0 16px}
+.seg button{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:7px 4px;font-size:13px;color:var(--ink)}
+.seg button[aria-pressed=true]{background:var(--redsoft);border-color:var(--red);color:var(--red);font-weight:600}
+.pop select{width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:13px;margin:0 0 14px}
+.pop .chk{display:flex;align-items:center;justify-content:flex-start;gap:8px;color:var(--ink);margin:0 0 10px}
+/* Flüstern aus der Nacht (Startseite) */
+.oracle{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:30px 26px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;min-height:380px}
+.olabel{font:600 12px var(--sans);letter-spacing:.8px;text-transform:uppercase;color:var(--mute)}
+.moon{width:116px;height:116px;border-radius:50%;border:0;cursor:pointer;flex:none;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--red) 55%,#fff),var(--red) 58%,color-mix(in srgb,var(--red) 40%,#000) 100%);box-shadow:0 0 46px color-mix(in srgb,var(--red) 45%,transparent);animation:moonPulse 4s ease-in-out infinite;transition:transform .2s}
+.moon:hover{transform:scale(1.07)}
+.moon:active{transform:scale(.96)}
+@keyframes moonPulse{50%{box-shadow:0 0 84px color-mix(in srgb,var(--red) 60%,transparent)}}
+.oq{font:italic 300 20px/1.6 var(--serif);min-height:8em;display:flex;align-items:center;justify-content:center;transition:opacity .3s;margin:0}
+.oq.fade{opacity:0}
+.oq.hint{font:400 14px var(--sans);color:var(--mute)}
+.orow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.bat{position:absolute;left:0;top:0;pointer-events:none;z-index:2;color:var(--ink);opacity:.85}
+.bat svg{display:block;width:100%;height:auto}
+@keyframes flash{0%,55%{background:var(--redsoft)}100%{background:transparent}}
+.text p.flash{animation:flash 2.6s ease-out}
+/* Mini-Spiel: Der Hunger wächst */
+.game{margin:8px 0 48px}
+.ghead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+.ghead h2{margin:0;font:600 22px var(--serif)}
+.gstat{font-size:14px;color:var(--mute)}
+.gstat b{color:var(--ink)}
+.gmeter{height:10px;background:var(--bg2);border:1px solid var(--line);border-radius:99px;overflow:hidden;margin:0 0 12px}
+#gBar{height:100%;width:0;background:var(--red);border-radius:99px;transition:width .2s}
+.gfield{position:relative;height:320px;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 86% 18%,color-mix(in srgb,var(--red) 26%,transparent) 0,transparent 28%),linear-gradient(var(--bg2),var(--panel));user-select:none;-webkit-user-select:none;outline:none}
+.gfield.playing{touch-action:none;cursor:crosshair}
+.gfield.shake{animation:gshake .3s}
+@keyframes gshake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.gp{position:absolute;left:0;top:0;border-radius:50%;text-align:center;pointer-events:none;background:color-mix(in srgb,var(--red) 22%,transparent);box-shadow:0 0 0 2px var(--red),0 0 26px color-mix(in srgb,var(--red) 45%,transparent);z-index:2}
+.gi{position:absolute;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;font-size:30px;line-height:40px;text-align:center;pointer-events:none;animation:gpop .25s ease-out}
+@keyframes gpop{from{opacity:0;scale:.3}to{opacity:1;scale:1}}
+.gi.old{opacity:.45}
+.gov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px);z-index:5}
+.gov[hidden]{display:none}
+.gov p{margin:0;max-width:40ch;font:italic 300 19px/1.55 var(--serif)}
 footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 @media(max-width:820px){.hero,.reader,.chars,.cards{grid-template-columns:1fr}.toc{position:static;flex-direction:row;flex-wrap:wrap}.toc h4{width:100%}.hero{padding-top:36px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
@@ -110,7 +160,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <button data-go="start" aria-current="true">Start</button>
 <button data-go="lesen">Lesen</button>
 <button data-go="chars">Charaktere</button>
-<a href="https://youtu.be/dQw4w9WgXcQ?si=kIH8A6LGTRvn67YZ">WICHTIG</a>
+<a href="https://youtu.be/dQw4w9WgXcQ?si=1VpFXnEkpfEoM3K6">WICHTIG</a>
 <button class="theme" id="theme" aria-label="Hell oder dunkel wechseln">◐</button>
 <button class="theme" id="gear" aria-label="Einstellungen" aria-expanded="false">⚙</button>
 </nav></div></header>
@@ -122,18 +172,25 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <h1>Obsessed By<br>A Vampire</h1>
 <div class="lead">
 <p>Für den sechzehnjährigen Gorin ist das Leben eine permanente Hölle. Zu Hause regieren Grausamkeit und rohe Gewalt, bis ihn die unerträgliche Erschöpfung in die kalte Dunkelheit der Nacht treibt. Doch auf den verlassenen Straßen von Düsseldorf wartet keine Zuflucht, sondern Nari – eine wunderschöne, aber unerbittliche Vampirin.</p>
-<p>Ihr Biss erlöst Gorin zwar von seinen Peinigern, kettet ihn jedoch an ein grausames Schicksal.</p>
+<p>Ihr Biss erlöst Gorin zwar von seinen Peinigern, kettet ihn jedoch an ein grausames Schicksal: Ein absolut tödlicher 12-Stunden-Zyklus beginnt. Bekommt Gorins Körper nicht rechtzeitig ihr Blut, setzt der physische Verfall ein.</p>
 </div>
 <div class="tags"><span>Dark Fantasy</span><span>Modern Vampire Lore</span><span>Dark Drama</span><span>Action Thriller</span><span>Anti-Hero Fiction</span></div>
 <div class="cta"><button class="btn" data-go="lesen">Jetzt lesen</button><button class="btn ghost" data-go="chars">Charaktere kennenlernen</button></div>
 </div>
-<aside class="clock">
-<svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" fill="none" stroke="var(--line)" stroke-width="8"/><circle id="ring" cx="100" cy="100" r="88" fill="none" stroke="var(--red)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="553" stroke-dashoffset="0"/></svg>
-<div class="t" id="tt">12:00:00</div>
-<small>bis zum nächsten Biss</small>
-<p>Gorins Zyklus dauert 12 Stunden. Danach beginnt der Verfall.</p>
+<aside class="oracle" id="oracle" aria-label="Zufälliger Satz aus der Geschichte">
+<div class="olabel">Ein Flüstern aus der Nacht</div>
+<button class="moon" id="moon" aria-label="Blutmond berühren: zufälligen Satz anzeigen"></button>
+<p class="oq hint" id="oq" aria-live="polite">Berühre den Mond …</p>
+<div class="orow"><button class="btn" id="oAgain">🦇 Flüstere mir etwas zu</button><button class="btn ghost" id="oMore" hidden>Im Kapitel lesen</button></div>
 </aside>
 </div>
+<section class="game" id="game" aria-label="Mini-Spiel: Der Hunger wächst">
+<div class="ghead"><h2>Mini-Spiel: Der Hunger wächst</h2><div class="gstat">Gefangen: <b id="gScore">0</b> · Rekord: <b id="gBest">0</b></div></div>
+<div class="gmeter" aria-hidden="true"><div id="gBar"></div></div>
+<div class="gfield" id="gField" tabindex="0" aria-label="Spielfeld">
+<div class="gov" id="gOv"><p id="gOvT">Lauf zu den Tropfen 🩸 (Maus, Finger oder Pfeiltasten/WASD). Mit jedem Tropfen wächst du, und den Knoblauch 🧄 darfst du nie berühren.</p><button class="btn" id="gStart">Spiel starten</button></div>
+</div>
+</section>
 <div class="cards">
 <div class="card"><h3>Lesen</h3><p>Alle Kapitel an einem Ort, mit einstellbarer Schriftgröße.</p></div>
 <div class="card"><h3>Charaktere</h3><p>Steckbriefe zu Gorin, Nari, Eri und Yafo.</p></div>
@@ -146,6 +203,14 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <div class="toc" id="toc"><h4>Kapitel</h4></div>
 <article class="page">
 <div class="tools"><span id="meta"></span><div><button id="fm" aria-label="Schrift kleiner">A−</button><button id="fp" aria-label="Schrift größer">A+</button></div></div>
+<div class="tts" id="tts" role="group" aria-label="Kapitel vorlesen" hidden>
+<button class="main" id="ttsPlay" aria-label="Vorlesen starten oder pausieren">▶ Vorlesen</button>
+<button id="ttsStop" aria-label="Vorlesen beenden" disabled>■ Stopp</button>
+<label>Tempo <select id="ttsRate" aria-label="Sprechtempo"><option value="0.8">0,8×</option><option value="1" selected>1×</option><option value="1.2">1,2×</option><option value="1.5">1,5×</option><option value="1.8">1,8×</option></select></label>
+<label>Stimme <select id="ttsVoice" aria-label="Stimme"></select></label>
+<label><input type="checkbox" id="ttsAuto"> Danach weiterlesen</label>
+<span class="sp"></span><span class="st" id="ttsSt" aria-live="polite"></span>
+</div>
 <h2 id="ct"></h2><div class="text" id="cx"></div>
 <div class="nextrow"><button class="btn ghost" id="prev">Zurück</button><button class="btn" id="next">Nächstes Kapitel</button></div>
 </article></div>
@@ -169,7 +234,26 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <button class="sw" data-acc="rot"><i style="background:#e0252d"></i>Rot</button>
 <button class="sw" data-acc="lila"><i style="background:#8a4fd6"></i>Lila</button>
 <button class="sw" data-acc="pink"><i style="background:#e8478a"></i>Pink</button>
-</div></div>
+</div>
+<div class="grp">Lesen</div>
+<div class="lbl">Schriftart</div>
+<div class="seg" data-key="font"><button data-v="serif">Serif</button><button data-v="sans">Sans</button><button data-v="lesbar">Lesbar</button></div>
+<div class="lbl">Zeilenabstand</div>
+<div class="seg" data-key="lh"><button data-v="eng">Eng</button><button data-v="normal">Normal</button><button data-v="weit">Weit</button></div>
+<div class="lbl">Textbreite</div>
+<div class="seg" data-key="w"><button data-v="schmal">Schmal</button><button data-v="normal">Normal</button><button data-v="breit">Breit</button></div>
+<div class="lbl">Hintergrund</div>
+<div class="seg" data-key="bg"><button data-v="std">Standard</button><button data-v="sepia">Sepia</button><button data-v="oled">Schwarz</button></div>
+<label class="chk"><input type="checkbox" id="setSpark"> Funken-Effekt</label>
+<div id="setTts" hidden>
+<div class="grp">Vorlesen</div>
+<label for="setRate">Standardtempo</label><select id="setRate"></select>
+<label for="setVoice">Standardstimme</label><select id="setVoice"></select>
+<label class="chk"><input type="checkbox" id="setAuto"> Danach weiterlesen</label>
+<label class="chk"><input type="checkbox" id="setHl"> Absatz markieren</label>
+<label class="chk"><input type="checkbox" id="setScroll"> Automatisch mitscrollen</label>
+</div>
+</div>
  
 <aside class="peek" id="peek" aria-label="Sneak Peeks und Leaks">
 <button id="pk" aria-expanded="false"><span><i></i>Sneak Peeks &amp; Leaks</span><span id="pa">+</span></button>
@@ -177,7 +261,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 </aside>
 <footer>Obsessed By A Vampire – eine Web Novel</footer>
  
-<script src="auth.js"></script>
+<script src="auth.js" onerror="window.__noAuth=1"></script>
 <script>
 /* ===== Inhalte: hier einfach bearbeiten ===== */
 /* WICHTIG: Kapiteltexte mit Backticks ` ... ` schreiben (erlaubt Zeilenumbrüche).
@@ -323,15 +407,299 @@ d.innerHTML='<span class="k"></span><b></b><em></em>';d.querySelector('.k').text
 const em=d.querySelector('em');em.textContent=p.q;if(p.lock)em.className='lock';$('#pb').append(d)});
 $('#pk').onclick=()=>{const o=$('#peek').classList.toggle('open');$('#pk').setAttribute('aria-expanded',o);$('#pa').textContent=o?'–':'+'};
  
-/* ===== 12-Stunden-Uhr ===== */
-function tick(){const n=new Date(),s=(n.getHours()%12)*3600+n.getMinutes()*60+n.getSeconds(),r=43200-s,
-h=Math.floor(r/3600),m=Math.floor(r%3600/60),sec=r%60,z=v=>String(v).padStart(2,'0');
-$('#tt').textContent=z(h)+':'+z(m)+':'+z(sec);$('#ring').setAttribute('stroke-dashoffset',553*(1-r/43200))}
-tick();setInterval(tick,1000);
- 
 /* Farbdesign, Hell/Dunkel und Einstellungsfenster stehen in auth.js */
 setFs(+load('oabv-fs')||19);
  
+/* ===== Zusatz-Einstellungen ===== */
+(function(){
+const R=document.documentElement;
+const MAP={font:{serif:'var(--serif)',sans:'var(--sans)',lesbar:"'Atkinson Hyperlegible',var(--sans)"},
+ lh:{eng:'1.55',normal:'1.85',weit:'2.15'},w:{schmal:'50ch',normal:'62ch',breit:'80ch'}};
+const DEF={font:'serif',lh:'normal',w:'normal',bg:'std'};
+function apply(k,v){
+ if(k==='font')R.style.setProperty('--tf',MAP.font[v]);
+ else if(k==='lh')R.style.setProperty('--lh',MAP.lh[v]);
+ else if(k==='w')R.style.setProperty('--tw',MAP.w[v]);
+ else if(k==='bg'){if(v==='std')R.removeAttribute('data-bg');else R.setAttribute('data-bg',v)}}
+document.querySelectorAll('.seg').forEach(g=>{
+ const k=g.dataset.key,btns=[...g.querySelectorAll('button')];
+ let v=load('oabv-'+k);if(!btns.some(b=>b.dataset.v===v))v=DEF[k];
+ const mark=()=>btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
+ apply(k,v);mark();
+ btns.forEach(b=>b.onclick=()=>{v=b.dataset.v;store('oabv-'+k,v);apply(k,v);mark()})});
+function bindFlag(id,key,attr){
+ const el=$(id);if(!el)return;const on=load('oabv-'+key)!=='0';
+ el.checked=on;R.dataset[attr]=on?'1':'0';
+ el.onchange=()=>{store('oabv-'+key,el.checked?'1':'0');R.dataset[attr]=el.checked?'1':'0'}}
+bindFlag('#setHl','hl','hl');bindFlag('#setScroll','scroll','scroll');
+})();
+/* ===== Notfall-Ersatz, falls auth.js nicht geladen werden konnte ===== */
+(function(){
+if(!window.__noAuth)return;
+const R=document.documentElement,gear=$('#gear'),pop=$('#setp'),th=$('#theme');
+function setOpen(o){pop.hidden=!o;gear.setAttribute('aria-expanded',o)}
+gear.onclick=e=>{e.stopPropagation();setOpen(pop.hidden)};
+document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target)&&e.target!==gear)setOpen(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+const dark=()=>R.dataset.theme?R.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+const t=load('oabv-theme');if(t==='light'||t==='dark')R.dataset.theme=t;
+th.onclick=()=>{const n=dark()?'light':'dark';R.dataset.theme=n;store('oabv-theme',n)};
+const ACC={original:null,gruen:'#1f9d5c',rot:'#e0252d',lila:'#8a4fd6',pink:'#e8478a'};
+function acc(k){const c=ACC[k];
+ if(c){R.style.setProperty('--red',c);R.style.setProperty('--redsoft',c+'1c')}
+ else{R.style.removeProperty('--red');R.style.removeProperty('--redsoft')}
+ document.querySelectorAll('[data-acc]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.acc===k))}
+document.querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>{store('oabv-acc',b.dataset.acc);acc(b.dataset.acc)});
+const sa=load('oabv-acc');acc(Object.prototype.hasOwnProperty.call(ACC,sa)?sa:'original');
+})();
+/* ===== Flüstern aus der Nacht ===== */
+(function(){
+const card=$('#oracle');if(!card)return;
+const q=$('#oq'),more=$('#oMore'),again=$('#oAgain'),moon=$('#moon');
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const BAT='<svg viewBox="0 0 64 32" aria-hidden="true"><path fill="currentColor" d="M32 10c-3-4-6-7-12-7C14 3 8 6 2 14c5-2 8-1 11 2 2-3 5-4 8-3 2 1 4 4 5 8 1-2 2-4 3-5l3 5c1-4 3-7 5-8 3-1 6 0 8 3 3-3 6-4 11-2C56 6 50 3 44 3c-6 0-9 3-12 7z"/></svg>';
+let pool=null,sel=null;
+function build(){pool=[];
+ chapters.forEach((c,ci)=>(Array.isArray(c.x)?c.x:String(c.x).split('\n')).forEach(par=>{
+  (par.match(/[^.!?…]+[.!?…]+/g)||[]).forEach(s=>{s=s.trim();
+   if(s.length>=50&&s.length<=170&&/^[A-ZÄÖÜ]/.test(s)&&!/["„“”»«]/.test(s))pool.push({s,ci})})}))}
+function bats(){
+ if(calm)return;const w=card.clientWidth,h=card.clientHeight;
+ for(let i=0;i<7;i++){
+  const b=document.createElement('span');b.className='bat';b.innerHTML=BAT;
+  b.style.width=(30+Math.random()*26)+'px';card.append(b);
+  const lr=Math.random()<.5,x0=lr?-60:w+20,x1=lr?w+20:-60,fl=lr?1:-1;
+  const y0=h*(.45+Math.random()*.55),y1=h*Math.random()*.45,ym=Math.min(y0,y1)-20-Math.random()*50;
+  const a=b.animate([
+   {transform:`translate(${x0}px,${y0}px) scaleX(${fl})`},
+   {transform:`translate(${(x0+x1)/2}px,${ym}px) scaleX(${fl})`},
+   {transform:`translate(${x1}px,${y1}px) scaleX(${fl})`}],
+   {duration:1800+Math.random()*1400,delay:i*130,easing:'ease-in-out',fill:'backwards'});
+  a.onfinish=()=>b.remove();
+  b.firstChild.animate([{transform:'scaleY(1)'},{transform:'scaleY(.45)'},{transform:'scaleY(1)'}],{duration:260,iterations:Infinity})}}
+function whisper(){
+ if(!pool)build();if(!pool.length)return;
+ let n;do{n=pool[Math.floor(Math.random()*pool.length)]}while(pool.length>1&&sel&&n.s===sel.s);
+ sel=n;bats();q.classList.add('fade');
+ setTimeout(()=>{q.classList.remove('hint');q.textContent='„'+n.s+'“';q.classList.remove('fade');more.hidden=false},300)}
+function toText(){
+ if(!sel)return;go('lesen');show(sel.ci);
+ setTimeout(()=>{const p=[...document.querySelectorAll('#cx p')].find(p=>p.textContent.includes(sel.s));
+  if(p){p.scrollIntoView({block:'center'});p.classList.remove('flash');void p.offsetWidth;p.classList.add('flash')}},80)}
+moon.onclick=whisper;again.onclick=whisper;more.onclick=toText;
+})();
+/* ===== Mini-Spiel: Der Hunger wächst ===== */
+(function(){
+const g=$('#game');if(!g)return;
+const field=$('#gField'),bar=$('#gBar'),sc=$('#gScore'),bestEl=$('#gBest'),ov=$('#gOv'),ovT=$('#gOvT'),startB=$('#gStart');
+const R0=16,RMAX=110;
+let run=false,score=0,t=0,last=0,raf=0,px=0,py=0,r=R0,tx=null,ty=null,items=[],dropIn=0,garlicIn=0,player=null;
+const keys={};
+let best=+load('oabv-best2')||0;bestEl.textContent=best;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const W=()=>field.clientWidth,H=()=>field.clientHeight;
+function place(el,x,y){el.style.transform='translate('+x+'px,'+y+'px)'}
+function sizePlayer(){
+ player.style.width=player.style.height=(2*r)+'px';
+ player.style.fontSize=(1.5*r)+'px';player.style.lineHeight=(2*r)+'px';
+ bar.style.width=Math.min(100,(r-R0)/(RMAX-R0)*100)+'%'}
+function drawPlayer(){place(player,px-r,py-r)}
+function add(bad){
+ const w=W(),h=H();let x,y,k=0;
+ do{x=rnd(26,w-26);y=rnd(26,h-26);k++}while(k<12&&Math.hypot(x-px,y-py)<r+(bad?60:30));
+ const el=document.createElement('div');el.className='gi';el.textContent=bad?'🧄':'🩸';
+ el.style.left=x+'px';el.style.top=y+'px';
+ field.append(el);
+ items.push({el,x,y,bad,die:t+(bad?9:Math.max(2.6,5-score*.06))})}
+function pointer(e){
+ if(!run)return;const b=field.getBoundingClientRect();
+ tx=Math.max(0,Math.min(W(),e.clientX-b.left));ty=Math.max(0,Math.min(H(),e.clientY-b.top))}
+field.addEventListener('pointermove',pointer);
+field.addEventListener('pointerdown',pointer);
+document.addEventListener('keydown',e=>{
+ if(!run)return;const k=e.key.toLowerCase();
+ if(['arrowup','arrowdown','arrowleft','arrowright','w','a','s','d'].includes(k)){keys[k]=true;e.preventDefault()}});
+document.addEventListener('keyup',e=>{delete keys[e.key.toLowerCase()]});
+function tick(now){
+ if(!run)return;
+ const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
+ const sp=Math.max(150,300-r*1.1);
+ let vx=(keys.arrowright||keys.d?1:0)-(keys.arrowleft||keys.a?1:0),vy=(keys.arrowdown||keys.s?1:0)-(keys.arrowup||keys.w?1:0);
+ if(vx||vy){const l=Math.hypot(vx,vy);px+=vx/l*sp*dt;py+=vy/l*sp*dt;tx=ty=null}
+ else if(tx!==null){const dx=tx-px,dy=ty-py,d=Math.hypot(dx,dy);
+  if(d>3){const m=Math.min(d,sp*dt);px+=dx/d*m;py+=dy/d*m}}
+ px=Math.max(0,Math.min(W(),px));py=Math.max(0,Math.min(H(),py));
+ drawPlayer();
+ dropIn-=dt;garlicIn-=dt;
+ const drops=items.filter(i=>!i.bad).length,gar=items.length-drops;
+ if(dropIn<=0&&drops<3){add(false);dropIn=.45}
+ if(garlicIn<=0&&gar<16){add(true);garlicIn=Math.max(.9,2.6-score*.07)}
+ for(const it of items){
+  if(t>=it.die){it.el.remove();it.gone=true;continue}
+  if(it.die-t<1)it.el.classList.add('old');
+  const d=Math.hypot(it.x-px,it.y-py);
+  if(it.bad){if(d<r*.9+13){end();return}}
+  else if(d<r+18){it.el.remove();it.gone=true;score++;sc.textContent=score;r=Math.min(RMAX,R0+score*1.7);sizePlayer()}}
+ items=items.filter(i=>!i.gone);
+ raf=requestAnimationFrame(tick)}
+function clear(){items.forEach(i=>i.el.remove());items=[]}
+function begin(){
+ clear();if(player)player.remove();
+ player=document.createElement('div');player.className='gp';player.textContent='🧛';field.append(player);
+ run=true;score=0;t=0;r=R0;px=W()/2;py=H()/2;tx=ty=null;dropIn=0;garlicIn=2.5;
+ sc.textContent='0';sizePlayer();drawPlayer();
+ field.classList.add('playing');ov.hidden=true;field.focus({preventScroll:true});
+ last=performance.now();raf=requestAnimationFrame(tick)}
+function end(){
+ run=false;cancelAnimationFrame(raf);field.classList.remove('playing');
+ field.classList.remove('shake');void field.offsetWidth;field.classList.add('shake');
+ for(const k in keys)delete keys[k];
+ const rec=score>best;if(rec){best=score;store('oabv-best2',best);bestEl.textContent=best}
+ ovT.textContent='Autsch, Knoblauch! Du hast '+score+' Tropfen gefangen und bist dabei immer größer geworden.'+(rec&&score>0?' Neuer Rekord!':'');
+ startB.textContent='Nochmal';ov.hidden=false}
+startB.onclick=begin;
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&run)end()});
+})();
+/* ===== Funken-Effekt ===== */
+(function(){
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+const cv=document.createElement('canvas');cv.id='sparks';cv.setAttribute('aria-hidden','true');
+cv.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:60';
+document.body.append(cv);const cx=cv.getContext('2d');
+let on=load('oabv-spark')!=='0',w=0,h=0,raf=0,lastT=0,lx=-99,ly=-99;const ps=[];
+const chk=$('#setSpark');
+if(chk){chk.checked=on;chk.onchange=()=>{on=chk.checked;store('oabv-spark',on?'1':'0');if(!on){ps.length=0;cx.clearRect(0,0,w,h)}}}
+function size(){const d=Math.min(2,devicePixelRatio||1);w=innerWidth;h=innerHeight;cv.width=w*d;cv.height=h*d;cx.setTransform(d,0,0,d,0,0)}
+size();addEventListener('resize',size);
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function spawn(x,y,n,burst){
+ const acc=getComputedStyle(document.documentElement).getPropertyValue('--red').trim()||'#a8102a';
+ const cols=[acc,'#ff7a2f','#ffc861'];
+ for(let i=0;i<n;i++){
+  const a=Math.random()*Math.PI*2,sp=burst?rnd(70,280):rnd(15,80),life=rnd(.5,burst?1.3:.9);
+  ps.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(burst?30:25),life,max:life,r:rnd(1.2,burst?3.2:2.4),c:cols[Math.floor(Math.random()*cols.length)]})}
+ if(ps.length>260)ps.splice(0,ps.length-260);
+ if(!raf){lastT=performance.now();raf=requestAnimationFrame(frame)}}
+function frame(now){
+ const dt=Math.min(.05,(now-lastT)/1000);lastT=now;
+ cx.clearRect(0,0,w,h);
+ for(let i=ps.length-1;i>=0;i--){
+  const p=ps[i];p.life-=dt;
+  if(p.life<=0){ps.splice(i,1);continue}
+  const k=Math.pow(.04,dt);p.vx*=k;p.vy=p.vy*k-60*dt;
+  p.x+=p.vx*dt;p.y+=p.vy*dt;
+  const al=p.life/p.max;
+  cx.fillStyle=p.c;
+  cx.globalAlpha=al*.25;cx.beginPath();cx.arc(p.x,p.y,p.r*3,0,6.283);cx.fill();
+  cx.globalAlpha=al;cx.beginPath();cx.arc(p.x,p.y,p.r*al+.3,0,6.283);cx.fill()}
+ cx.globalAlpha=1;
+ raf=ps.length?requestAnimationFrame(frame):0}
+const skip=e=>!on||(e.target&&e.target.closest&&e.target.closest('.gfield.playing'));
+document.addEventListener('pointermove',e=>{
+ if(e.pointerType!=='mouse'||skip(e))return;
+ if(Math.hypot(e.clientX-lx,e.clientY-ly)<12)return;
+ lx=e.clientX;ly=e.clientY;spawn(lx,ly,2,false)},{passive:true});
+document.addEventListener('pointerdown',e=>{if(!skip(e))spawn(e.clientX,e.clientY,16,true)},{passive:true});
+})();
+/* ===== Quellcode-Schutz (Abschreckung) ===== */
+(function(){
+const stop=e=>{e.preventDefault();e.stopPropagation();return false};
+document.addEventListener('contextmenu',stop,true);
+document.addEventListener('dragstart',e=>{if(e.target&&e.target.tagName==='IMG')stop(e)},true);
+document.addEventListener('keydown',e=>{
+ const k=(e.key||'').toLowerCase(),c=e.ctrlKey||e.metaKey;
+ if(e.key==='F12'||
+   (c&&!e.altKey&&['u','s'].includes(k))||
+   (c&&e.shiftKey&&['i','j','c','k'].includes(k))||
+   (e.metaKey&&e.altKey&&['i','j','c','u'].includes(k)))return stop(e)},true);
+})();
+/* ===== Vorlesen (Text-to-Speech) ===== */
+(function(){
+const syn=window.speechSynthesis;
+if(!syn||typeof SpeechSynthesisUtterance==='undefined')return;
+const box=$('#tts'),bPlay=$('#ttsPlay'),bStop=$('#ttsStop'),sRate=$('#ttsRate'),sVoice=$('#ttsVoice'),cAuto=$('#ttsAuto'),st=$('#ttsSt');
+box.hidden=false;
+const pSec=$('#setTts'),pRate=$('#setRate'),pVoice=$('#setVoice'),pAuto=$('#setAuto');if(pSec)pSec.hidden=false;
+let state='idle',queue=[],qi=0,gen=0,voices=[],keepAlive=null;
+function loadVoices(){
+ const all=syn.getVoices();if(!all.length)return;
+ const de=all.filter(v=>/^de\b/i.test(v.lang.replace('_','-')));
+ voices=de.length?de:all;
+ const saved=load('oabv-tts-voice');
+ sVoice.innerHTML='';
+ voices.forEach((v,i)=>{const o=document.createElement('option');o.value=v.voiceURI;o.textContent=v.name+' ('+v.lang+')';sVoice.append(o)});
+ const pick=voices.find(v=>v.voiceURI===saved)||voices.find(v=>v.localService&&/de/i.test(v.lang))||voices[0];
+ if(pick)sVoice.value=pick.voiceURI;
+ if(pVoice){pVoice.innerHTML=sVoice.innerHTML;pVoice.value=sVoice.value}}
+loadVoices();if(syn.onvoiceschanged!==undefined)syn.addEventListener('voiceschanged',loadVoices);
+const sr=load('oabv-tts-rate');if(sr&&[...sRate.options].some(o=>o.value===sr))sRate.value=sr;
+cAuto.checked=load('oabv-tts-auto')==='1';
+sRate.onchange=()=>{store('oabv-tts-rate',sRate.value);if(state==='playing'||state==='paused')restartFrom(qi)};
+sVoice.onchange=()=>{store('oabv-tts-voice',sVoice.value);if(state==='playing'||state==='paused')restartFrom(qi)};
+cAuto.onchange=()=>store('oabv-tts-auto',cAuto.checked?'1':'0');
+if(pRate){pRate.innerHTML=sRate.innerHTML;pRate.value=sRate.value;pAuto.checked=cAuto.checked;
+ pRate.onchange=()=>{sRate.value=pRate.value;sRate.onchange()};
+ pVoice.onchange=()=>{sVoice.value=pVoice.value;sVoice.onchange()};
+ pAuto.onchange=()=>{cAuto.checked=pAuto.checked;cAuto.onchange()};
+ sRate.addEventListener('change',()=>{pRate.value=sRate.value});
+ sVoice.addEventListener('change',()=>{pVoice.value=sVoice.value});
+ cAuto.addEventListener('change',()=>{pAuto.checked=cAuto.checked})}
+
+function chunks(text){
+ // pro Absatz in Sätze zerlegen (Chrome bricht sehr lange Äußerungen ab)
+ const parts=text.match(/[^.!?…]+[.!?…]+["“”„»«')\]]*\s*|[^.!?…]+$/g)||[text];
+ const out=[];let buf='';
+ parts.forEach(s=>{if((buf+s).length>220&&buf){out.push(buf);buf=s}else buf+=s});
+ if(buf.trim())out.push(buf);
+ return out.map(t=>t.trim()).filter(Boolean)}
+function build(){
+ const ps=[...document.querySelectorAll('#cx p')];queue=[];
+ ps.forEach((p,pi)=>chunks(p.textContent).forEach((t,k)=>queue.push({t,pi,first:k===0})));
+ return ps}
+function mark(pi){
+ document.querySelectorAll('#cx p.speaking').forEach(p=>p.classList.remove('speaking'));
+ if(pi==null)return;const p=document.querySelectorAll('#cx p')[pi];
+ if(p){p.classList.add('speaking');
+  const r=p.getBoundingClientRect(),h=innerHeight;
+  if(document.documentElement.dataset.scroll!=='0'&&(r.top<90||r.bottom>h-60))p.scrollIntoView({block:'center',behavior:'smooth'})}}
+function ui(){
+ bPlay.textContent=state==='playing'?'❚❚ Pause':state==='paused'?'▶ Weiter':'▶ Vorlesen';
+ bStop.disabled=state==='idle';
+ st.textContent=state==='idle'?'':(state==='paused'?'Pausiert · ':'Liest · ')+Math.min(100,Math.round(qi/Math.max(1,queue.length)*100))+' %'}
+function speakNext(g){
+ if(g!==gen)return;
+ if(qi>=queue.length){finish();return}
+ const item=queue[qi];mark(item.pi);ui();
+ const u=new SpeechSynthesisUtterance(item.t);
+ const v=voices.find(v=>v.voiceURI===sVoice.value);
+ if(v){u.voice=v;u.lang=v.lang}else u.lang='de-DE';
+ u.rate=+sRate.value||1;
+ u.onend=()=>{if(g!==gen)return;qi++;speakNext(g)};
+ u.onerror=e=>{if(g!==gen)return;if(e.error==='interrupted'||e.error==='canceled')return;qi++;speakNext(g)};
+ syn.speak(u)}
+function restartFrom(i){gen++;syn.cancel();qi=i;state='playing';startKeepAlive();const g=gen;setTimeout(()=>speakNext(g),60)}
+function startKeepAlive(){stopKeepAlive();
+ // Workaround: manche Browser stoppen lange Sprachausgabe von allein
+ keepAlive=setInterval(()=>{if(state==='playing'&&syn.speaking&&!syn.paused){syn.pause();syn.resume()}},12000)}
+function stopKeepAlive(){if(keepAlive){clearInterval(keepAlive);keepAlive=null}}
+function start(){build();if(!queue.length)return;restartFrom(0)}
+function stop(){gen++;syn.cancel();state='idle';qi=0;stopKeepAlive();mark(null);ui()}
+function finish(){
+ const wasLast=cur>=chapters.length-1;stop();
+ if(cAuto.checked&&!wasLast){show(cur+1);scrollTo(0,0);setTimeout(start,400)}}
+bPlay.onclick=()=>{
+ if(state==='idle')start();
+ else if(state==='playing'){syn.pause();state='paused';ui()}
+ else{syn.resume();state='playing';ui()}};
+bStop.onclick=stop;
+// Kapitelwechsel beendet das Vorlesen
+const origShow=show;
+show=function(i){const was=state!=='idle';if(was)stop();origShow(i)};
+addEventListener('pagehide',()=>{syn.cancel()});
+addEventListener('beforeunload',()=>{syn.cancel()});
+document.addEventListener('visibilitychange',()=>{});
+ui();
+})();
 </script>
 </body>
 </html>
