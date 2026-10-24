@@ -40,7 +40,7 @@ h1{font:300 clamp(40px,7vw,76px)/1.02 var(--serif);margin:0 0 24px;letter-spacin
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn.big{padding:14px 20px;border-radius:12px;font-size:16px}
 .btn:disabled{opacity:.55;cursor:wait}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
 .card h3{font:600 20px var(--serif);margin:0 0 6px}
 .card p{margin:0;color:var(--mute);font-size:14.5px}
@@ -80,19 +80,6 @@ h1{font:300 clamp(40px,7vw,76px)/1.02 var(--serif);margin:0 0 24px;letter-spacin
 .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:14px}
 .facts dt{color:var(--mute)}.facts dd{margin:0}
 h2.sec{font:300 34px var(--serif);margin:48px 0 0;letter-spacing:-.5px}
-/* Sneak-Fenster */
-.peek{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px #00000030;z-index:20;overflow:hidden}
-.peek>button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:13px 16px;font-weight:600;font-size:14px}
-.peek>button i{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;margin-right:8px;animation:p 2s infinite}
-@keyframes p{50%{opacity:.25}}
-.peek .body{display:none;max-height:300px;overflow:auto;border-top:1px solid var(--line)}
-.peek.open .body{display:block}
-.item{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px}
-.item:last-child{border:0}
-.item b{display:block;font:600 15px var(--serif);margin-bottom:2px}
-.item em{font:italic 300 15px var(--serif);color:var(--ink)}
-.item .k{font-size:12px;color:var(--red);font-weight:600}
-.lock{filter:blur(4px);user-select:none}
 /* Einstellungen */
 .pop{position:fixed;top:calc(62px + env(safe-area-inset-top,0px));right:16px;width:min(300px,calc(100vw - 32px));background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px #00000030;padding:20px;z-index:30}
 .pop h4,.box h4{margin:0 0 16px;font:600 20px var(--serif)}
@@ -160,7 +147,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <button data-go="start" aria-current="true">Start</button>
 <button data-go="lesen">Lesen</button>
 <button data-go="chars">Charaktere</button>
-<a href="https://youtu.be/dQw4w9WgXcQ?si=1VpFXnEkpfEoM3K6">WICHTIG</a>
+<a href="https://youtu.be/dQw4w9WgXcQ?si=Yt-m0QjZY_h96mpp">WICHTIG></a>
 <button class="theme" id="theme" aria-label="Hell oder dunkel wechseln">◐</button>
 <button class="theme" id="gear" aria-label="Einstellungen" aria-expanded="false">⚙</button>
 </nav></div></header>
@@ -194,7 +181,6 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 <div class="cards">
 <div class="card"><h3>Lesen</h3><p>Alle Kapitel an einem Ort, mit einstellbarer Schriftgröße.</p></div>
 <div class="card"><h3>Charaktere</h3><p>Steckbriefe zu Gorin, Nari, Eri und Yafo.</p></div>
-<div class="card"><h3>Sneak Peeks &amp; Leaks</h3><p>Das kleine Fenster unten rechts verrät, was als Nächstes kommt.</p></div>
 </div>
 </section>
  
@@ -255,10 +241,6 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:24px}
 </div>
 </div>
  
-<aside class="peek" id="peek" aria-label="Sneak Peeks und Leaks">
-<button id="pk" aria-expanded="false"><span><i></i>Sneak Peeks &amp; Leaks</span><span id="pa">+</span></button>
-<div class="body" id="pb"></div>
-</aside>
 <footer>Obsessed By A Vampire – eine Web Novel</footer>
  
 <script src="auth.js" onerror="window.__noAuth=1"></script>
@@ -365,10 +347,6 @@ const chars=[
 {"n": "Nari", "r": "Unbekannte", "f": {"Alter": "unbekannt", "Ort": "Düsseldorf", "Spezies": "noch unklar"}, "d": "Gorin trifft sie in der Nacht. Sie hört ihm zu, nimmt ihn in den Arm und beißt ihn schließlich in den Nacken."},
 {"n": "Eri", "r": "Gorins Mutter", "f": {"Rolle": "Mutter von Gorin", "Aussehen": "hager, tiefe Falten, dunkles Haar"}, "d": "Kalt, verbittert und gewalttätig. Sie hat Gorin als Kind mit heißem Kaffee verbrüht und ihm vor einem Jahr Messerschnitte zugefügt. Auch ihre eigenen Eltern haben sie emotional verstoßen."},
 {"n": "Yafo", "r": "Gorins Vater", "f": {"Rolle": "Vater von Gorin", "Aussehen": "schwer, dicke Brille"}, "d": "Jähzornig und träge. Er zwingt Gorin zu Diebstählen, schlägt ihn und seine Frau und sperrt seinen Sohn ein. Er wurde selbst in Härte erzogen."}];
-const peeks=[
-{k:"Sneak Peek",t:"Kapitel 1",q:"„Ihr Lächeln war das Letzte, was er sah, bevor die Welt still wurde.“ (Platzhalter)"},
-{k:"Leak",t:"Akira zieht die Schlinge zu",q:"Ein neues Mitglied von TSLTD tritt in Erscheinung."},
-{k:"Leak",t:"Seis Entscheidung",q:"████████ ███ ██████ ███████",lock:1}];
  
 const $=s=>document.querySelector(s);
 const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
@@ -401,11 +379,6 @@ el.querySelector('p').textContent=c.d;
 Object.entries(c.f).forEach(([k,v])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=v;el.querySelector('dl').append(dt,dd)});
 $('#cg').append(el)});
  
-/* ===== Sneak Peeks ===== */
-peeks.forEach(p=>{const d=document.createElement('div');d.className='item';
-d.innerHTML='<span class="k"></span><b></b><em></em>';d.querySelector('.k').textContent=p.k;d.querySelector('b').textContent=p.t;
-const em=d.querySelector('em');em.textContent=p.q;if(p.lock)em.className='lock';$('#pb').append(d)});
-$('#pk').onclick=()=>{const o=$('#peek').classList.toggle('open');$('#pk').setAttribute('aria-expanded',o);$('#pa').textContent=o?'–':'+'};
  
 /* Farbdesign, Hell/Dunkel und Einstellungsfenster stehen in auth.js */
 setFs(+load('oabv-fs')||19);
